@@ -27,7 +27,7 @@ from sklearn.model_selection import learning_curve
 #from sklearn.externals import joblib
 import joblib
 
-from gp_extras.kernels import HeteroscedasticKernel
+#from gp_extras.kernels import HeteroscedasticKernel
 from sklearn.cluster import KMeans
 
 from . import cachedir, parse_model_parameter_file
@@ -125,15 +125,15 @@ class Emulator:
         #heteroscedastic noise kernel
         use_hom_sced_noise = True
 
-        if use_hom_sced_noise:
-            kernel = (rbf_kern + hom_white_kern)
-        else:
-            n_clusters = 10
-            prototypes = KMeans(n_clusters=n_clusters).fit(
-                        self.design_points[eventMask, :]).cluster_centers_
-            het_noise_kern = HeteroscedasticKernel.construct(
-                prototypes, 1., (1e-1, 1e1), gamma=1e-5, gamma_bounds="fixed")
-            kernel = (rbf_kern + het_noise_kern)
+        kernel = (rbf_kern + hom_white_kern)
+        #if use_hom_sced_noise:
+        #else:
+        #    n_clusters = 10
+        #    prototypes = KMeans(n_clusters=n_clusters).fit(
+        #                self.design_points[eventMask, :]).cluster_centers_
+        #    het_noise_kern = HeteroscedasticKernel.construct(
+        #        prototypes, 1., (1e-1, 1e1), gamma=1e-5, gamma_bounds="fixed")
+        #    kernel = (rbf_kern + het_noise_kern)
 
         # Fit a GP (optimize the kernel hyperparameters) to each PC.
         self.gps = [
