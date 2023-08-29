@@ -105,6 +105,8 @@ def main():
     offset = 68
 
     # make plot
+    vnLabels = [r"$v_2\{2\}$", r"$v_3\{2\}$"]
+    pidLables = [r"$\pi^+$", r"$K^+$", r"$p$", r"$\bar{p}$"]
     # pid dN/dy @ 200 GeV
     offset = 0
     fig1 = plt.figure()
@@ -113,10 +115,12 @@ def main():
         id1 = id0 + dNcencut
         plt.errorbar(cenList[:dNcencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='', label="STAR")
+                     color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:dNcencut],
                          pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                         label = pidLables[ipart])
+    plt.legend()
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$dN/dy$")
     plt.yscale('log')
@@ -129,10 +133,12 @@ def main():
         id1 = id0 + dNcencut
         plt.errorbar(cenList[:dNcencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='', label="STAR")
+                     color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:dNcencut],
                          pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                         label = pidLables[ipart])
+    plt.legend()
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$\langle p_T \rangle$ (GeV)")
     plt.ylim([0, 1.5])
@@ -145,15 +151,17 @@ def main():
         id1 = id0 + vncencut
         plt.errorbar(cenList[:vncencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='', label="STAR")
+                     color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:vncencut],
                          pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                         label = vnLabels[ipart])
+    plt.legend()
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$v_n$")
     plt.ylim([0, 0.12])
 
-    st.write("Au+Au @ 200 GeV")
+    st.write("## Au+Au @ 200 GeV vs. STAR data:")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig1)
     col2.pyplot(fig2)
@@ -190,6 +198,7 @@ def main():
                  color='k', marker='o', linestyle='', label="PHOBOS")
     plt.fill_between(v2rapArr[2:-2], pred[id0:id1] + predErr[id0:id1],
                      pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+    plt.text(-4, 0.07, r"0-40\%", fontsize=18)
     plt.legend()
     plt.xlim([-5, 5])
     plt.ylim([0, 0.08])
@@ -204,10 +213,12 @@ def main():
         id1 = id0 + dNcencut
         plt.errorbar(cenList[:dNcencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='', label="STAR")
+                     color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:dNcencut],
                          pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                         label = pidLables[ipart])
+    plt.legend()
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$dN/dy$")
     plt.yscale('log')
@@ -220,10 +231,12 @@ def main():
         id1 = id0 + dNcencut
         plt.errorbar(cenList[:dNcencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='', label="STAR")
+                     color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:dNcencut],
                          pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                         label = pidLables[ipart])
+    plt.legend()
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$\langle p_T \rangle$ (GeV)")
     plt.ylim([0, 1.5])
@@ -236,10 +249,12 @@ def main():
         id1 = id0 + vncencut
         plt.errorbar(cenList[:vncencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='', label="STAR")
+                     color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:vncencut],
                          pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                         label = vnLabels[ipart])
+    plt.legend()
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$v_n$")
     plt.ylim([0, 0.12])
@@ -275,10 +290,12 @@ def main():
         id1 = id0 + dNcencut
         plt.errorbar(cenList[:dNcencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='', label="STAR")
+                     color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:dNcencut],
                          pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                         label = pidLables[ipart])
+    plt.legend()
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$dN/dy$")
     plt.yscale('log')
@@ -291,10 +308,12 @@ def main():
         id1 = id0 + dNcencut
         plt.errorbar(cenList[:dNcencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='', label="STAR")
+                     color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:dNcencut],
                          pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                         label = pidLables[ipart])
+    plt.legend()
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$\langle p_T \rangle$ (GeV)")
     plt.ylim([0, 1.5])
@@ -307,10 +326,12 @@ def main():
         id1 = id0 + vncencut
         plt.errorbar(cenList[:vncencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='', label="STAR")
+                     color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:vncencut],
                          pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                         label = vnLabels[ipart])
+    plt.legend()
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$v_n$")
     plt.ylim([0, 0.12])
