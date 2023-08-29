@@ -182,6 +182,7 @@ def main():
         plt.fill_between(rapArr, pred[id0:id1] + predErr[id0:id1],
                          pred[id0:id1] - predErr[id0:id1], alpha=0.5)
     plt.legend()
+    plt.text([-4, 800, "AuAu 200 GeV")
     plt.xlim([-5, 5])
     plt.ylim([0, 900])
     plt.xlabel(r"$\eta$")
@@ -201,7 +202,7 @@ def main():
                  color='k', marker='o', linestyle='', label="PHOBOS")
     plt.fill_between(v2rapArr[2:-2], pred[id0:id1] + predErr[id0:id1],
                      pred[id0:id1] - predErr[id0:id1], alpha=0.5)
-    plt.text(-4, 0.07, r"0-40%", fontsize=18)
+    plt.text(-4, 0.07, r"0-40% AuAu 200 GeV", fontsize=18)
     plt.legend()
     plt.xlim([-5, 5])
     plt.ylim([0, 0.08])
@@ -282,6 +283,7 @@ def main():
         plt.fill_between(rapArr, pred[id0:id1] + predErr[id0:id1],
                          pred[id0:id1] - predErr[id0:id1], alpha=0.5)
     plt.legend()
+    plt.text([-4, 400, "AuAu 19.6 GeV")
     plt.xlim([-5, 5])
     plt.ylim([0, 450])
     plt.xlabel(r"$\eta$")
