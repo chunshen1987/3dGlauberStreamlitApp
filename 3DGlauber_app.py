@@ -156,12 +156,12 @@ def main():
                          pred[id0:id1] + predErr[id0:id1],
                          pred[id0:id1] - predErr[id0:id1], alpha=0.5,
                          label = vnLabels[ipart])
-    plt.legend()
+    plt.legend(loc=2)
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$v_n$")
     plt.ylim([0, 0.12])
 
-    st.write("## Au+Au @ 200 GeV vs. STAR data:")
+    st.write("### Au+Au @ 200 GeV vs. STAR")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig1)
     col2.pyplot(fig2)
@@ -198,7 +198,7 @@ def main():
                  color='k', marker='o', linestyle='', label="PHOBOS")
     plt.fill_between(v2rapArr[2:-2], pred[id0:id1] + predErr[id0:id1],
                      pred[id0:id1] - predErr[id0:id1], alpha=0.5)
-    plt.text(-4, 0.07, r"0-40\%", fontsize=18)
+    plt.text(-4, 0.07, r"0-40%", fontsize=18)
     plt.legend()
     plt.xlim([-5, 5])
     plt.ylim([0, 0.08])
@@ -254,12 +254,12 @@ def main():
                          pred[id0:id1] + predErr[id0:id1],
                          pred[id0:id1] - predErr[id0:id1], alpha=0.5,
                          label = vnLabels[ipart])
-    plt.legend()
+    plt.legend(loc=2)
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$v_n$")
     plt.ylim([0, 0.12])
 
-    st.write("Au+Au @ 19.6 GeV")
+    st.write("### Au+Au @ 19.6 GeV vs. STAR")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig1)
     col2.pyplot(fig2)
@@ -331,18 +331,18 @@ def main():
                          pred[id0:id1] + predErr[id0:id1],
                          pred[id0:id1] - predErr[id0:id1], alpha=0.5,
                          label = vnLabels[ipart])
-    plt.legend()
+    plt.legend(loc=2)
     plt.xlabel(r"Centrality (%)")
     plt.ylabel(r"$v_n$")
     plt.ylim([0, 0.12])
 
-    st.write("Au+Au @ 7.7 GeV")
+    st.write("### Au+Au @ 7.7 GeV vs. STAR")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig1)
     col2.pyplot(fig2)
     col3.pyplot(fig3)
 
-    st.write("Comparisons to the PHOBOS data")
+    st.write("### Comparisons to the PHOBOS data")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig4)
     col2.pyplot(fig5)
