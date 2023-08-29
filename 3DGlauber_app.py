@@ -153,6 +153,7 @@ def main():
     plt.ylabel(r"$v_n$")
     plt.ylim([0, 0.12])
 
+    st.write("Au+Au @ 200 GeV")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig1)
     col2.pyplot(fig2)
@@ -243,6 +244,7 @@ def main():
     plt.ylabel(r"$v_n$")
     plt.ylim([0, 0.12])
 
+    st.write("Au+Au @ 19.6 GeV")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig1)
     col2.pyplot(fig2)
@@ -313,11 +315,13 @@ def main():
     plt.ylabel(r"$v_n$")
     plt.ylim([0, 0.12])
 
+    st.write("Au+Au @ 7.7 GeV")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig1)
     col2.pyplot(fig2)
     col3.pyplot(fig3)
 
+    st.write("Comparisons to the PHOBOS data")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig4)
     col2.pyplot(fig5)
