@@ -150,7 +150,9 @@ def main():
         id0 = offset + ipart*vncencut
         id1 = id0 + vncencut
         plt.errorbar(cenList[:vncencut],
-                     exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                     exp_data[id0:id1, 0],
+                     np.sqrt(exp_data[id0:id1, 1]**2.
+                             + exp_data[id0:id1, 2]**2.),
                      color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:vncencut],
                          pred[id0:id1] + predErr[id0:id1],
@@ -194,7 +196,8 @@ def main():
     fig5 = plt.figure()
     id0 = offset
     id1 = id0 + v2Nrap
-    plt.errorbar(v2rapArr[2:-2], exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+    plt.errorbar(v2rapArr[2:-2], exp_data[id0:id1, 0],
+                 np.sqrt(exp_data[id0:id1, 1]**2. + exp_data[id0:id1, 2]**2.),
                  color='k', marker='o', linestyle='', label="PHOBOS")
     plt.fill_between(v2rapArr[2:-2], pred[id0:id1] + predErr[id0:id1],
                      pred[id0:id1] - predErr[id0:id1], alpha=0.5)
@@ -248,7 +251,9 @@ def main():
         id0 = offset + ipart*vncencut
         id1 = id0 + vncencut
         plt.errorbar(cenList[:vncencut],
-                     exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                     exp_data[id0:id1, 0],
+                     np.sqrt(exp_data[id0:id1, 1]**2.
+                             + exp_data[id0:id1, 2]**2.),
                      color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:vncencut],
                          pred[id0:id1] + predErr[id0:id1],
@@ -325,7 +330,9 @@ def main():
         id0 = offset + ipart*vncencut
         id1 = id0 + vncencut
         plt.errorbar(cenList[:vncencut],
-                     exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                     exp_data[id0:id1, 0],
+                     np.sqrt(exp_data[id0:id1, 1]**2.
+                             + exp_data[id0:id1, 2]**2.),
                      color='k', marker='o', linestyle='')
         plt.fill_between(cenList[:vncencut],
                          pred[id0:id1] + predErr[id0:id1],
