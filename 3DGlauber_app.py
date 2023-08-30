@@ -56,7 +56,7 @@ def main():
              + "as functions of rapidity "
              + "using the 3D-Glauber+MUSIC+UrQMD model.")
     st.write("This work is based on [link]"
-             + "(xxx)")
+             + "(https://indico.cern.ch/event/1139644/contributions/5453464/)")
     st.write("One can adjust the model parameters on the left sidebar.")
     st.write("The colored bands in the figure show the emulator estimations "
              + "with their uncertainties. "
