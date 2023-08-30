@@ -20,13 +20,13 @@ def parse_model_parameter_file(parfile):
             par = par.split(":")
             key = par[0]
             val = [ival.strip() for ival in par[1].split(",")]
-            for i in range(1, 3):
+            for i in range(1, 4):
                 val[i] = float(val[i])
             pardict.update({key: val})
     return pardict
 
 
-@st.cache(allow_output_mutation=True)
+@st.cache_data
 def loadEmulator():
     emuList = ["Emulator_AuAu200_dNdy.joblib",
                "Emulator_AuAu200_pTvn.joblib",
@@ -71,7 +71,7 @@ def main():
     for ikey in paraDict.keys():
         parMin = paraDict[ikey][1]
         parMax = paraDict[ikey][2]
-        parInit = (parMax + parMin)/2.
+        parInit = paraDict[ikey][3]
         parVal = st.sidebar.slider(label=paraDict[ikey][0],
                                    min_value=parMin, max_value=parMax,
                                    value=parInit,
