@@ -169,6 +169,10 @@ def main():
     col2.pyplot(fig2)
     col3.pyplot(fig3)
 
+    plt.close(fig1)
+    plt.close(fig2)
+    plt.close(fig3)
+
     # dNch/deta @ 200 GeV
     cenLabels = ["0-5%", "5-12%", "12.5-23.5%", "23.5-33.5%", "33.5-43.5%"]
     offset += 2*vncencut
@@ -271,6 +275,10 @@ def main():
     col2.pyplot(fig2)
     col3.pyplot(fig3)
 
+    plt.close(fig1)
+    plt.close(fig2)
+    plt.close(fig3)
+
     # dNch/deta @ 19.6 GeV
     offset += 2*vncencut
     fig6 = plt.figure()
@@ -351,11 +359,19 @@ def main():
     col2.pyplot(fig2)
     col3.pyplot(fig3)
 
+    plt.close(fig1)
+    plt.close(fig2)
+    plt.close(fig3)
+
     st.write("### Comparisons to the PHOBOS data")
     col1, col2, col3 = st.columns(3)
     col1.pyplot(fig4)
     col2.pyplot(fig5)
     col3.pyplot(fig6)
+
+    plt.close(fig4)
+    plt.close(fig5)
+    plt.close(fig6)
 
 if __name__ == '__main__':
     main()
