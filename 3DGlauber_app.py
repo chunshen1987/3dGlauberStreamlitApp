@@ -26,7 +26,7 @@ def parse_model_parameter_file(parfile):
     return pardict
 
 
-@st.cache_data
+@st.cache_data(ttl=24*3600)
 def loadEmulator():
     emuList = ["Emulator_AuAu200_dNdy.joblib",
                "Emulator_AuAu200_pTvn.joblib",
