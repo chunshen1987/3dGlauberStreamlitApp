@@ -107,90 +107,85 @@ def main():
     # make plot
     vnLabels = [r"$v_2\{2\}$", r"$v_3\{2\}$"]
     pidLables = [r"$\pi^+$", r"$K^+$", r"$p$", r"$\bar{p}$"]
+
     # pid dN/dy @ 200 GeV
     offset = 0
-    fig1 = plt.figure()
+    fig1, ax = plt.subplots(1, 3, figsize=(14,4))
     for ipart in range(4):
         id0 = offset + ipart*dNcencut
         id1 = id0 + dNcencut
-        plt.errorbar(cenList[:dNcencut],
+        ax[0].errorbar(cenList[:dNcencut],
                      exp_data[id0:id1, 0], exp_data[id0:id1, 1],
                      color='k', marker='o', linestyle='')
-        plt.fill_between(cenList[:dNcencut],
+        ax[0].fill_between(cenList[:dNcencut],
                          pred[id0:id1] + predErr[id0:id1],
                          pred[id0:id1] - predErr[id0:id1], alpha=0.5,
                          label = pidLables[ipart])
-    plt.legend()
-    plt.xlabel(r"Centrality (%)")
-    plt.ylabel(r"$dN/dy$")
-    plt.yscale('log')
+
+    ax[0].legend()
+    ax[0].set_xlabel(r"Centrality (%)")
+    ax[0].set_ylabel(r"$dN/dy$")
+    ax[0].set_yscale('log')
 
     # pid mean pT @ 200 GeV
     offset += 4*dNcencut
-    fig2 = plt.figure()
     for ipart in range(4):
         id0 = offset + ipart*dNcencut
         id1 = id0 + dNcencut
-        plt.errorbar(cenList[:dNcencut],
-                     exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='')
-        plt.fill_between(cenList[:dNcencut],
-                         pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
-                         label = pidLables[ipart])
-    plt.legend()
-    plt.xlabel(r"Centrality (%)")
-    plt.ylabel(r"$\langle p_T \rangle$ (GeV)")
-    plt.ylim([0, 1.5])
+        ax[1].errorbar(cenList[:dNcencut],
+                       exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                       color='k', marker='o', linestyle='')
+        ax[1].fill_between(cenList[:dNcencut],
+                           pred[id0:id1] + predErr[id0:id1],
+                           pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                           label = pidLables[ipart])
+    ax[1].legend()
+    ax[1].set_xlabel(r"Centrality (%)")
+    ax[1].set_ylabel(r"$\langle p_T \rangle$ (GeV)")
+    ax[1].set_ylim([0, 1.5])
 
     # charged hadron vn @ 200 GeV
     offset += 4*dNcencut
-    fig3 = plt.figure()
     for ipart in range(2):
         id0 = offset + ipart*vncencut
         id1 = id0 + vncencut
-        plt.errorbar(cenList[:vncencut],
-                     exp_data[id0:id1, 0],
-                     np.sqrt(exp_data[id0:id1, 1]**2.
-                             + exp_data[id0:id1, 2]**2.),
-                     color='k', marker='o', linestyle='')
-        plt.fill_between(cenList[:vncencut],
-                         pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
-                         label = vnLabels[ipart])
-    plt.legend(loc=2)
-    plt.xlabel(r"Centrality (%)")
-    plt.ylabel(r"$v_n$")
-    plt.ylim([0, 0.12])
+        ax[2].errorbar(cenList[:vncencut],
+                       exp_data[id0:id1, 0],
+                       np.sqrt(exp_data[id0:id1, 1]**2.
+                               + exp_data[id0:id1, 2]**2.),
+                       color='k', marker='o', linestyle='')
+        ax[2].fill_between(cenList[:vncencut],
+                           pred[id0:id1] + predErr[id0:id1],
+                           pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                           label = vnLabels[ipart])
+    ax[2].legend(loc=2)
+    ax[2].set_xlabel(r"Centrality (%)")
+    ax[2].set_ylabel(r"$v_n$")
+    ax[2].set_ylim([0, 0.12])
 
     st.write("### Au+Au @ 200 GeV vs. STAR")
-    col1, col2, col3 = st.columns(3)
-    col1.pyplot(fig1)
-    col2.pyplot(fig2)
-    col3.pyplot(fig3)
+    st.pyplot(fig1)
 
     plt.close(fig1)
-    plt.close(fig2)
-    plt.close(fig3)
 
     # dNch/deta @ 200 GeV
     cenLabels = ["0-5%", "5-12%", "12.5-23.5%", "23.5-33.5%", "33.5-43.5%"]
     offset += 2*vncencut
-    fig4 = plt.figure()
+    fig2, ax = plt.subplots(1, 3, figsize=(14,4))
     for ipart in range(5):
         id0 = offset + ipart*Nrap
         id1 = id0 + Nrap
-        plt.errorbar(rapArr, exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='',
-                     label=cenLabels[ipart])
-        plt.fill_between(rapArr, pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
-    plt.legend()
-    plt.text(-4, 800, "AuAu 200 GeV", fontsize=16)
-    plt.xlim([-5, 5])
-    plt.ylim([0, 900])
-    plt.xlabel(r"$\eta$")
-    plt.ylabel(r"$dN^\mathrm{ch}/d\eta$")
+        ax[0].errorbar(rapArr, exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                       color='k', marker='o', linestyle='',
+                       label=cenLabels[ipart])
+        ax[0].fill_between(rapArr, pred[id0:id1] + predErr[id0:id1],
+                           pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+    ax[0].legend()
+    ax[0].text(-4, 800, "AuAu 200 GeV", fontsize=16)
+    ax[0].set_xlim([-5, 5])
+    ax[0].set_ylim([0, 900])
+    ax[0].set_xlabel(r"$\eta$")
+    ax[0].set_ylabel(r"$dN^\mathrm{ch}/d\eta$")
 
     # v2(eta) @ 200 GeV
     offset += 5*Nrap
@@ -198,180 +193,157 @@ def main():
                          -1.26, -0.76, -0.3, 0.3, 0.76, 1.26, 1.75,
                          2.25, 2.70, 3.41, 4.16, 4.94])
     v2Nrap = v2rapArr.size - 4
-    fig5 = plt.figure()
+    #fig5 = plt.figure()
     id0 = offset
     id1 = id0 + v2Nrap
-    plt.errorbar(v2rapArr[2:-2], exp_data[id0:id1, 0],
-                 np.sqrt(exp_data[id0:id1, 1]**2. + exp_data[id0:id1, 2]**2.),
-                 color='k', marker='o', linestyle='', label="PHOBOS")
-    plt.fill_between(v2rapArr[2:-2], pred[id0:id1] + predErr[id0:id1],
-                     pred[id0:id1] - predErr[id0:id1], alpha=0.5)
-    plt.text(-4, 0.07, r"0-40% AuAu 200 GeV", fontsize=16)
-    plt.legend()
-    plt.xlim([-5, 5])
-    plt.ylim([0, 0.08])
-    plt.xlabel(r"$\eta$")
-    plt.ylabel(r"$v_2(\eta)$")
+    ax[1].errorbar(v2rapArr[2:-2], exp_data[id0:id1, 0],
+                   np.sqrt(exp_data[id0:id1, 1]**2. + exp_data[id0:id1, 2]**2.),
+                   color='k', marker='o', linestyle='', label="PHOBOS")
+    ax[1].fill_between(v2rapArr[2:-2], pred[id0:id1] + predErr[id0:id1],
+                       pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+    ax[1].text(-4, 0.07, r"0-40% AuAu 200 GeV", fontsize=16)
+    ax[1].legend()
+    ax[1].set_xlim([-5, 5])
+    ax[1].set_ylim([0, 0.08])
+    ax[1].set_xlabel(r"$\eta$")
+    ax[1].set_ylabel(r"$v_2(\eta)$")
 
     # pid dN/dy @ 19.6 GeV
     offset += v2Nrap
-    fig1 = plt.figure()
+    fig1, ax1 = plt.subplots(1, 3, figsize=(14,4))
     for ipart in range(3):
         id0 = offset + ipart*dNcencut
         id1 = id0 + dNcencut
-        plt.errorbar(cenList[:dNcencut],
-                     exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='')
-        plt.fill_between(cenList[:dNcencut],
-                         pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
-                         label = pidLables[ipart])
-    plt.legend()
-    plt.xlabel(r"Centrality (%)")
-    plt.ylabel(r"$dN/dy$")
-    plt.yscale('log')
+        ax1[0].errorbar(cenList[:dNcencut],
+                        exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                        color='k', marker='o', linestyle='')
+        ax1[0].fill_between(cenList[:dNcencut],
+                            pred[id0:id1] + predErr[id0:id1],
+                            pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                            label = pidLables[ipart])
+    ax1[0].legend()
+    ax1[0].set_xlabel(r"Centrality (%)")
+    ax1[0].set_ylabel(r"$dN/dy$")
+    ax1[0].set_yscale('log')
 
     # pid mean pT @ 19.6 GeV
     offset += 3*dNcencut
-    fig2 = plt.figure()
     for ipart in range(4):
         id0 = offset + ipart*dNcencut
         id1 = id0 + dNcencut
-        plt.errorbar(cenList[:dNcencut],
-                     exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='')
-        plt.fill_between(cenList[:dNcencut],
-                         pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
-                         label = pidLables[ipart])
-    plt.legend()
-    plt.xlabel(r"Centrality (%)")
-    plt.ylabel(r"$\langle p_T \rangle$ (GeV)")
-    plt.ylim([0, 1.5])
+        ax1[1].errorbar(cenList[:dNcencut],
+                        exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                        color='k', marker='o', linestyle='')
+        ax1[1].fill_between(cenList[:dNcencut],
+                            pred[id0:id1] + predErr[id0:id1],
+                            pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                            label = pidLables[ipart])
+    ax1[1].legend()
+    ax1[1].set_xlabel(r"Centrality (%)")
+    ax1[1].set_ylabel(r"$\langle p_T \rangle$ (GeV)")
+    ax1[1].set_ylim([0, 1.5])
 
     # charged hadron vn @ 19.6 GeV
     offset += 4*dNcencut
-    fig3 = plt.figure()
     for ipart in range(2):
         id0 = offset + ipart*vncencut
         id1 = id0 + vncencut
-        plt.errorbar(cenList[:vncencut],
-                     exp_data[id0:id1, 0],
-                     np.sqrt(exp_data[id0:id1, 1]**2.
-                             + exp_data[id0:id1, 2]**2.),
-                     color='k', marker='o', linestyle='')
-        plt.fill_between(cenList[:vncencut],
-                         pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
-                         label = vnLabels[ipart])
-    plt.legend(loc=2)
-    plt.xlabel(r"Centrality (%)")
-    plt.ylabel(r"$v_n$")
-    plt.ylim([0, 0.12])
+        ax1[2].errorbar(cenList[:vncencut],
+                        exp_data[id0:id1, 0],
+                        np.sqrt(exp_data[id0:id1, 1]**2.
+                                + exp_data[id0:id1, 2]**2.),
+                        color='k', marker='o', linestyle='')
+        ax1[2].fill_between(cenList[:vncencut],
+                            pred[id0:id1] + predErr[id0:id1],
+                            pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                            label = vnLabels[ipart])
+    ax1[2].legend(loc=2)
+    ax1[2].set_xlabel(r"Centrality (%)")
+    ax1[2].set_ylabel(r"$v_n$")
+    ax1[2].set_ylim([0, 0.12])
 
     st.write("### Au+Au @ 19.6 GeV vs. STAR")
-    col1, col2, col3 = st.columns(3)
-    col1.pyplot(fig1)
-    col2.pyplot(fig2)
-    col3.pyplot(fig3)
-
+    st.pyplot(fig1)
     plt.close(fig1)
-    plt.close(fig2)
-    plt.close(fig3)
 
     # dNch/deta @ 19.6 GeV
     offset += 2*vncencut
-    fig6 = plt.figure()
     for ipart in range(5):
         id0 = offset + ipart*Nrap
         id1 = id0 + Nrap
-        plt.errorbar(rapArr, exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='',
-                     label=cenLabels[ipart])
-        plt.fill_between(rapArr, pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5)
-    plt.legend()
-    plt.text(-4, 400, "AuAu 19.6 GeV", fontsize=16)
-    plt.xlim([-5, 5])
-    plt.ylim([0, 450])
-    plt.xlabel(r"$\eta$")
-    plt.ylabel(r"$dN^\mathrm{ch}/d\eta$")
+        ax[2].errorbar(rapArr, exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                       color='k', marker='o', linestyle='',
+                       label=cenLabels[ipart])
+        ax[2].fill_between(rapArr, pred[id0:id1] + predErr[id0:id1],
+                           pred[id0:id1] - predErr[id0:id1], alpha=0.5)
+    ax[2].legend()
+    ax[2].text(-4, 400, "AuAu 19.6 GeV", fontsize=16)
+    ax[2].set_xlim([-5, 5])
+    ax[2].set_ylim([0, 450])
+    ax[2].set_xlabel(r"$\eta$")
+    ax[2].set_ylabel(r"$dN^\mathrm{ch}/d\eta$")
 
     # pid dN/dy @ 7.7 GeV
     offset += 5*Nrap
-    fig1 = plt.figure()
+    fig1, ax1 = plt.subplots(1, 3, figsize=(14,4))
     for ipart in range(3):
         id0 = offset + ipart*dNcencut
         id1 = id0 + dNcencut
-        plt.errorbar(cenList[:dNcencut],
-                     exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='')
-        plt.fill_between(cenList[:dNcencut],
-                         pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
-                         label = pidLables[ipart])
-    plt.legend()
-    plt.xlabel(r"Centrality (%)")
-    plt.ylabel(r"$dN/dy$")
-    plt.yscale('log')
+        ax1[0].errorbar(cenList[:dNcencut],
+                        exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                        color='k', marker='o', linestyle='')
+        ax1[0].fill_between(cenList[:dNcencut],
+                            pred[id0:id1] + predErr[id0:id1],
+                            pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                            label = pidLables[ipart])
+    ax1[0].legend()
+    ax1[0].set_xlabel(r"Centrality (%)")
+    ax1[0].set_ylabel(r"$dN/dy$")
+    ax1[0].set_yscale('log')
 
     # pid mean pT @ 7.7 GeV
     offset += 3*dNcencut
-    fig2 = plt.figure()
     for ipart in range(4):
         id0 = offset + ipart*dNcencut
         id1 = id0 + dNcencut
-        plt.errorbar(cenList[:dNcencut],
-                     exp_data[id0:id1, 0], exp_data[id0:id1, 1],
-                     color='k', marker='o', linestyle='')
-        plt.fill_between(cenList[:dNcencut],
-                         pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
-                         label = pidLables[ipart])
-    plt.legend()
-    plt.xlabel(r"Centrality (%)")
-    plt.ylabel(r"$\langle p_T \rangle$ (GeV)")
-    plt.ylim([0, 1.5])
+        ax1[1].errorbar(cenList[:dNcencut],
+                        exp_data[id0:id1, 0], exp_data[id0:id1, 1],
+                        color='k', marker='o', linestyle='')
+        ax1[1].fill_between(cenList[:dNcencut],
+                            pred[id0:id1] + predErr[id0:id1],
+                            pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                            label = pidLables[ipart])
+    ax1[1].legend()
+    ax1[1].set_xlabel(r"Centrality (%)")
+    ax1[1].set_ylabel(r"$\langle p_T \rangle$ (GeV)")
+    ax1[1].set_ylim([0, 1.5])
 
     # charged hadron vn @ 7.7 GeV
     offset += 4*dNcencut
-    fig3 = plt.figure()
     for ipart in range(2):
         id0 = offset + ipart*vncencut
         id1 = id0 + vncencut
-        plt.errorbar(cenList[:vncencut],
-                     exp_data[id0:id1, 0],
-                     np.sqrt(exp_data[id0:id1, 1]**2.
-                             + exp_data[id0:id1, 2]**2.),
-                     color='k', marker='o', linestyle='')
-        plt.fill_between(cenList[:vncencut],
-                         pred[id0:id1] + predErr[id0:id1],
-                         pred[id0:id1] - predErr[id0:id1], alpha=0.5,
-                         label = vnLabels[ipart])
-    plt.legend(loc=2)
-    plt.xlabel(r"Centrality (%)")
-    plt.ylabel(r"$v_n$")
-    plt.ylim([0, 0.12])
+        ax1[2].errorbar(cenList[:vncencut],
+                        exp_data[id0:id1, 0],
+                        np.sqrt(exp_data[id0:id1, 1]**2.
+                                + exp_data[id0:id1, 2]**2.),
+                        color='k', marker='o', linestyle='')
+        ax1[2].fill_between(cenList[:vncencut],
+                            pred[id0:id1] + predErr[id0:id1],
+                            pred[id0:id1] - predErr[id0:id1], alpha=0.5,
+                            label = vnLabels[ipart])
+    ax1[2].legend(loc=2)
+    ax1[2].set_xlabel(r"Centrality (%)")
+    ax1[2].set_ylabel(r"$v_n$")
+    ax1[2].set_ylim([0, 0.12])
 
     st.write("### Au+Au @ 7.7 GeV vs. STAR")
-    col1, col2, col3 = st.columns(3)
-    col1.pyplot(fig1)
-    col2.pyplot(fig2)
-    col3.pyplot(fig3)
-
+    st.pyplot(fig1)
     plt.close(fig1)
-    plt.close(fig2)
-    plt.close(fig3)
 
     st.write("### Comparisons to the PHOBOS data")
-    col1, col2, col3 = st.columns(3)
-    col1.pyplot(fig4)
-    col2.pyplot(fig5)
-    col3.pyplot(fig6)
-
-    plt.close(fig4)
-    plt.close(fig5)
-    plt.close(fig6)
+    st.pyplot(fig2)
+    plt.close(fig2)
 
 if __name__ == '__main__':
     main()
