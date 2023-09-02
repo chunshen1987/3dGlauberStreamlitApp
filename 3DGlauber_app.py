@@ -126,9 +126,9 @@ def main():
     ax[0].set_xlabel(r"Centrality (%)")
     ax[0].set_ylabel(r"$dN/dy$")
     ax[0].set_yscale('log')
+    offset += 4*dNcencut
 
     # pid mean pT @ 200 GeV
-    offset += 4*dNcencut
     for ipart in range(4):
         id0 = offset + ipart*dNcencut
         id1 = id0 + dNcencut
@@ -143,9 +143,9 @@ def main():
     ax[1].set_xlabel(r"Centrality (%)")
     ax[1].set_ylabel(r"$\langle p_T \rangle$ (GeV)")
     ax[1].set_ylim([0, 1.5])
+    offset += 4*dNcencut
 
     # charged hadron vn @ 200 GeV
-    offset += 4*dNcencut
     for ipart in range(2):
         id0 = offset + ipart*vncencut
         id1 = id0 + vncencut
@@ -162,6 +162,7 @@ def main():
     ax[2].set_xlabel(r"Centrality (%)")
     ax[2].set_ylabel(r"$v_n$")
     ax[2].set_ylim([0, 0.12])
+    offset += 2*vncencut
 
     st.write("### Au+Au @ 200 GeV vs. STAR")
     st.pyplot(fig1)
@@ -170,7 +171,6 @@ def main():
 
     # dNch/deta @ 200 GeV
     cenLabels = ["0-5%", "5-12%", "12.5-23.5%", "23.5-33.5%", "33.5-43.5%"]
-    offset += 2*vncencut
     fig2, ax = plt.subplots(1, 3, figsize=(14,4))
     for ipart in range(5):
         id0 = offset + ipart*Nrap
@@ -186,14 +186,13 @@ def main():
     ax[0].set_ylim([0, 900])
     ax[0].set_xlabel(r"$\eta$")
     ax[0].set_ylabel(r"$dN^\mathrm{ch}/d\eta$")
+    offset += 5*Nrap
 
     # v2(eta) @ 200 GeV
-    offset += 5*Nrap
     v2rapArr = np.array([-4.90, -4.16, -3.41, -2.70, -2.25, -1.75,
                          -1.26, -0.76, -0.3, 0.3, 0.76, 1.26, 1.75,
                          2.25, 2.70, 3.41, 4.16, 4.94])
     v2Nrap = v2rapArr.size - 4
-    #fig5 = plt.figure()
     id0 = offset
     id1 = id0 + v2Nrap
     ax[1].errorbar(v2rapArr[2:-2], exp_data[id0:id1, 0],
@@ -207,9 +206,9 @@ def main():
     ax[1].set_ylim([0, 0.08])
     ax[1].set_xlabel(r"$\eta$")
     ax[1].set_ylabel(r"$v_2(\eta)$")
+    offset += v2Nrap
 
     # pid dN/dy @ 19.6 GeV
-    offset += v2Nrap
     fig1, ax1 = plt.subplots(1, 3, figsize=(14,4))
     for ipart in range(3):
         id0 = offset + ipart*dNcencut
@@ -225,9 +224,9 @@ def main():
     ax1[0].set_xlabel(r"Centrality (%)")
     ax1[0].set_ylabel(r"$dN/dy$")
     ax1[0].set_yscale('log')
+    offset += 3*dNcencut
 
     # pid mean pT @ 19.6 GeV
-    offset += 3*dNcencut
     for ipart in range(4):
         id0 = offset + ipart*dNcencut
         id1 = id0 + dNcencut
@@ -242,9 +241,9 @@ def main():
     ax1[1].set_xlabel(r"Centrality (%)")
     ax1[1].set_ylabel(r"$\langle p_T \rangle$ (GeV)")
     ax1[1].set_ylim([0, 1.5])
+    offset += 4*dNcencut
 
     # charged hadron vn @ 19.6 GeV
-    offset += 4*dNcencut
     for ipart in range(2):
         id0 = offset + ipart*vncencut
         id1 = id0 + vncencut
@@ -261,13 +260,13 @@ def main():
     ax1[2].set_xlabel(r"Centrality (%)")
     ax1[2].set_ylabel(r"$v_n$")
     ax1[2].set_ylim([0, 0.12])
+    offset += 2*vncencut
 
     st.write("### Au+Au @ 19.6 GeV vs. STAR")
     st.pyplot(fig1)
     plt.close(fig1)
 
     # dNch/deta @ 19.6 GeV
-    offset += 2*vncencut
     for ipart in range(5):
         id0 = offset + ipart*Nrap
         id1 = id0 + Nrap
@@ -282,9 +281,9 @@ def main():
     ax[2].set_ylim([0, 450])
     ax[2].set_xlabel(r"$\eta$")
     ax[2].set_ylabel(r"$dN^\mathrm{ch}/d\eta$")
+    offset += 5*Nrap
 
     # pid dN/dy @ 7.7 GeV
-    offset += 5*Nrap
     fig1, ax1 = plt.subplots(1, 3, figsize=(14,4))
     for ipart in range(3):
         id0 = offset + ipart*dNcencut
@@ -300,9 +299,9 @@ def main():
     ax1[0].set_xlabel(r"Centrality (%)")
     ax1[0].set_ylabel(r"$dN/dy$")
     ax1[0].set_yscale('log')
+    offset += 3*dNcencut
 
     # pid mean pT @ 7.7 GeV
-    offset += 3*dNcencut
     for ipart in range(4):
         id0 = offset + ipart*dNcencut
         id1 = id0 + dNcencut
@@ -317,9 +316,9 @@ def main():
     ax1[1].set_xlabel(r"Centrality (%)")
     ax1[1].set_ylabel(r"$\langle p_T \rangle$ (GeV)")
     ax1[1].set_ylim([0, 1.5])
+    offset += 4*dNcencut
 
     # charged hadron vn @ 7.7 GeV
-    offset += 4*dNcencut
     for ipart in range(2):
         id0 = offset + ipart*vncencut
         id1 = id0 + vncencut
